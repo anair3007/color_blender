@@ -33,9 +33,10 @@ def on_click_color_wheel(event, x, y, flags, userdata):
         beta_bgr = get_rgb_values(canvas, 0, 0)
         new_bgr = mix_colors(alpha_bgr, beta_bgr)
 
-        # fill canvas with new=\
-
-        cv2.imshow(canvas_window_name, canvas)
+        # fill canvas with new color
+        canvas[:, :] = new_bgr
+        # cv2.destroyWindow(canvas_window_name)
+        display_image(canvas, canvas_window_name)
 
 
 def get_rgb_values(image, x, y):
@@ -62,8 +63,10 @@ if __name__ == "__main__":
     color_wheel_window_name = "Color Wheel"
     canvas_window_name = "Canvas"
 
-    display_image(canvas_image, canvas_window_name)
     display_image(color_wheel_image, color_wheel_window_name)
+    cv2.moveWindow(color_wheel_window_name, 0, 50)
+    display_image(canvas_image, canvas_window_name)
+    cv2.moveWindow(canvas_window_name, 650, 50)
 
     userdata = (color_wheel_image, canvas_image, canvas_window_name)
 
